@@ -1,0 +1,129 @@
+$menu-prefix-cls: 'ivan-menu';
+
+.#{$menu-prefix-cls} {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+
+
+  & ul {
+    padding: 0;
+    margin: 0;
+  }
+
+  .#{$menu-prefix-cls}-item,
+  .#{$menu-prefix-cls}-submenu{
+    cursor: pointer;
+  }
+
+  &-submenu-disabled,
+  &-item-disabled {
+    color: $menu-item-disabled-color;
+    pointer-events: none;
+  }
+
+  .#{$menu-prefix-cls}-item{
+    padding: 0 $menu-item-padding-x;
+  }
+  
+  .#{$menu-prefix-cls}-submenu {
+    padding: 0
+  }
+
+  &-horizontal {
+    line-height: $menu-line-height;
+
+    >.#{$menu-prefix-cls}-item,
+    >.#{$menu-prefix-cls}-submenu {
+      position: relative;
+
+      &::after {
+        position: absolute;
+        right: $menu-item-padding-x;
+        display: block;
+        border-bottom: $menu-item-active-border-width solid transparent;
+        transition: border-color .1s ease-in-out;
+        left: $menu-item-padding-x;
+        content: ''
+      }
+
+
+      &-active,
+      &-open,
+      &-selected {
+        color: $menu-highlight-color;
+
+        &::after {
+          border-bottom: $menu-item-active-border-width solid $menu-highlight-color;
+        }
+      }
+    }
+  }
+
+  .#{$menu-prefix-cls}-submenu-popup {
+    position: absolute;
+    list-style: none;
+    padding-left: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 20%);
+    border: 1px solid $gray-400;
+    width: 100%;
+    transition: all 0.5s ease-in-out;
+    cursor: pointer;
+    display: none;
+
+    &-open{
+      display: block;
+    }
+  }
+
+  .#{$menu-prefix-cls}-submenu-title{
+    padding: 0 $menu-item-padding-x;
+    &:hover,
+    &:active {
+      color: $menu-highlight-color;
+    }
+  }
+
+  &-vertical {
+    flex-direction: column;
+    width: 100%;
+    max-width: $menu-vertical-max-width;
+
+    & .#{$menu-prefix-cls}-submenu-title {
+      margin-bottom: 8px;
+      padding: 0 $menu-item-padding-x;
+    }
+
+    .#{$menu-prefix-cls}-sub{
+      >.#{$menu-prefix-cls}-item{
+        padding: 0 $menu-item-padding-x 0 2*$menu-item-padding-x;
+      }
+    }
+
+    >.#{$menu-prefix-cls}-item{
+      margin-bottom: 8px;
+      &:hover,
+      &:active,
+      &-open,
+      &-selected {
+        color: $menu-highlight-color;
+        &::after {
+          border-right: $menu-item-active-border-width solid $menu-highlight-color;
+        }
+      }
+
+      &:active,
+      &-selected {
+        background-color: $menu-item-selected-bg-color;
+      }
+    }
+
+    // >.#{$menu-prefix-cls}-item:not(:last-child){
+    //   margin-bottom: 8px;
+    // }
+
+  }
+
+}

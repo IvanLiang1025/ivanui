@@ -1,0 +1,50 @@
+@mixin btn-size ($padding-y, $padding-x, $font-size, $border-radius) {
+  padding: $padding-y $padding-x;
+  font-size: $font-size;
+  border-radius: $border-radius;
+}
+
+
+
+@mixin btn-color ($color,
+  $bgColor,
+  $borderColor,
+  $hoverColor: $primary,
+  $hoverBgColor: lighten($bgColor, 5%),
+  $hoverBorderColor: lighten($primary, 10%),
+) {
+  color: $color;
+  background-color: $bgColor;
+  border-color: $borderColor;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: $hoverColor;
+    background-color: $hoverBgColor;
+    border-color: $hoverBorderColor;
+  }
+}
+
+
+@mixin btn-disabled ($color: $btn-disabled-color,
+  $bgColor: $btn-disabled-bg,
+  $borderColor: $btn-disabled-border-color) {
+
+  &[disabled],
+  &.diabled {
+    cursor: not-allowed;
+    > * {
+      pointer-events: none
+    };
+
+    &,
+    &:hover,
+    &:focus,
+    &:active {
+      color: $color;
+      background-color: $bgColor;
+      border-color: $borderColor;
+    }
+  }
+}

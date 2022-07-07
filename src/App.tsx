@@ -13,7 +13,7 @@ function App() {
   return (
     <div>
       <header>
-        <Menu mode='horizontal' defaultOpenIndexes={['sub', 'sub2']} defaultIndex='2'>
+        <Menu mode='horizontal' defaultIndex='2'>
           <MenuItem index={'1'}>item 1</MenuItem>
           <MenuItem index={'2'}> item 2</MenuItem>
           <MenuItem index={'3'} disabled> disabled</MenuItem>

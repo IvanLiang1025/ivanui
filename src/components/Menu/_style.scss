@@ -69,13 +69,14 @@ $menu-prefix-cls: 'ivan-menu';
     transform: translate(-50%, 20%);
     border: 1px solid $gray-400;
     width: 100%;
-    transition: all 0.5s ease-in-out;
+    // transition: all 0.5s ease-in-out;
+    box-shadow: $submenu-box-shadow;
     cursor: pointer;
-    display: none;
+    // display: none;
 
-    &-open{
-      display: block;
-    }
+    // &-open{
+    //   display: block;
+    // }
   }
 
   .#{$menu-prefix-cls}-submenu-title{

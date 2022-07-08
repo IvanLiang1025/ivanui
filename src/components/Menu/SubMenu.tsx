@@ -11,20 +11,23 @@ import Icon from '../Icon'
 
 const SubMenu: React.FC<SubMenuProps> = (props) => {
 
-  const { className, style, title, index, children } = props
+  const { className, style, title, index, children, expandIcon } = props
   const { defaultOpenIndexes, prefixCls, onSelect, mode } = useContext(MenuContext)
 
   const isDefaultOpened = useMemo(() => {
     return (defaultOpenIndexes && defaultOpenIndexes.length > 0 && index) ? defaultOpenIndexes.includes(index) : false
   }, [defaultOpenIndexes, index])
 
-  const [isOpend, setOpen] = useState(isDefaultOpened)
+  const [isOpen, setOpen] = useState(isDefaultOpened)
 
   const classes = classname(`${prefixCls}-submenu`, className)
+  const subMenuTitleClass = classname(`${prefixCls}-submenu-title`, {
+    [`${prefixCls}-submenu-title-active`]: isOpen
+  })
 
   const clickHandler = useCallback(() => {
-    setOpen(!isOpend)
-  }, [setOpen, isOpend])
+    setOpen(!isOpen)
+  }, [setOpen, isOpen])
 
   let timer: any
   const mouseHandler = useCallback((event: React.MouseEvent, toggle: boolean) => {
@@ -47,7 +50,7 @@ const SubMenu: React.FC<SubMenuProps> = (props) => {
   const renderChildren = () => {
 
     const subMenuContainerClass = mode === 'horizontal' ? classname(`${prefixCls}-submenu-popup`, {
-      [`${prefixCls}-submenu-popup-open`]: isOpend
+      [`${prefixCls}-submenu-popup-open`]: isOpen
     }) : ''
     const subMenuClass = classname(`${prefixCls}-vertical ${prefixCls} ${prefixCls}-sub`, {
     })
@@ -66,7 +69,7 @@ const SubMenu: React.FC<SubMenuProps> = (props) => {
 
     return (
       <CSSTransition
-        in={isOpend}
+        in={isOpen}
         timeout={500}
         classNames='zoom-in-top'
         unmountOnExit
@@ -83,9 +86,15 @@ const SubMenu: React.FC<SubMenuProps> = (props) => {
 
   return (
     <li className={classes} style={style} {...(mode !== 'vertical' ? horizontalEventHandler : {})}>
-      <div className={`${prefixCls}-submenu-title`} {...(mode === 'vertical' ? verticalEventHandler : {})}>
+      <div className={subMenuTitleClass} {...(mode === 'vertical' ? verticalEventHandler : {})}>
         {title}
-        <Icon icon='sort-down' className='expand-icon'></Icon> 
+        {
+          expandIcon ? (
+            <span className='expand-icon'>{expandIcon}</span>
+          ) : (
+            <Icon icon='angle-down' className='expand-icon'></Icon> 
+          )
+        }
       </div>
       {renderChildren()}
     </li>

@@ -30,8 +30,38 @@ $menu-prefix-cls: 'ivan-menu';
     padding: 0
   }
 
+
+  .#{$menu-prefix-cls}-submenu-title{
+    padding: 0 $menu-item-padding-x;
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    .expand-icon {
+      position: absolute;
+      transition: transform 0.2s ease-in-out
+    }
+
+    &:hover,
+    &-active {
+      color: $menu-highlight-color;
+    }
+
+    &-active{
+      .expand-icon {
+        transform: rotate(180deg)
+      }
+    }
+  }
+
   &-horizontal {
     line-height: $menu-line-height;
+
+    & .#{$menu-prefix-cls}-submenu-title {
+      .expand-icon {
+        right: 0;
+      }
+    }
 
     >.#{$menu-prefix-cls}-item,
     >.#{$menu-prefix-cls}-submenu {
@@ -48,6 +78,7 @@ $menu-prefix-cls: 'ivan-menu';
       }
 
 
+      &:hover,
       &-active,
       &-open,
       &-selected {
@@ -69,22 +100,8 @@ $menu-prefix-cls: 'ivan-menu';
     transform: translate(-50%, 20%);
     border: 1px solid $gray-400;
     width: 100%;
-    // transition: all 0.5s ease-in-out;
     box-shadow: $submenu-box-shadow;
     cursor: pointer;
-    // display: none;
-
-    // &-open{
-    //   display: block;
-    // }
-  }
-
-  .#{$menu-prefix-cls}-submenu-title{
-    padding: 0 $menu-item-padding-x;
-    &:hover,
-    &:active {
-      color: $menu-highlight-color;
-    }
   }
 
   &-vertical {
@@ -95,8 +112,13 @@ $menu-prefix-cls: 'ivan-menu';
     & .#{$menu-prefix-cls}-submenu-title {
       margin-bottom: 8px;
       padding: 0 $menu-item-padding-x;
+
+      .expand-icon {
+        right: 10px;
+      }
     }
 
+  
     .#{$menu-prefix-cls}-sub{
       >.#{$menu-prefix-cls}-item{
         padding: 0 $menu-item-padding-x 0 2*$menu-item-padding-x;
@@ -105,9 +127,8 @@ $menu-prefix-cls: 'ivan-menu';
 
     >.#{$menu-prefix-cls}-item{
       margin-bottom: 8px;
+
       &:hover,
-      &:active,
-      &-open,
       &-selected {
         color: $menu-highlight-color;
         &::after {
@@ -115,7 +136,6 @@ $menu-prefix-cls: 'ivan-menu';
         }
       }
 
-      &:active,
       &-selected {
         background-color: $menu-item-selected-bg-color;
       }

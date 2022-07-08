@@ -26,6 +26,7 @@ export interface MenuItemProps extends MenuSharedProps {
 
 export interface SubMenuProps extends MenuSharedProps {
   index?: string,
-  title: React.ReactNode
+  title: React.ReactNode,
+  expandIcon?: React.ReactNode,
 }
 

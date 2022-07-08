@@ -18,7 +18,7 @@ function App() {
           <MenuItem index={'2'}> item 2</MenuItem>
           <MenuItem index={'3'} disabled> disabled</MenuItem>
           <MenuItem index={'4'}> item 4</MenuItem>
-          <SubMenu title='submenu' index='sub'>
+          <SubMenu title='submenu' index='sub' expandIcon={<Icon icon='arrow-down'></Icon> }>
             <MenuItem index='sub-1'>sub-1</MenuItem>
             <MenuItem index='sub-2'>sub-2</MenuItem>
             <MenuItem index='sub-3'>sub-3</MenuItem>
